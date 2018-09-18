@@ -91,10 +91,15 @@ def main():
     generator = Generator(vocab_size, BATCH_SIZE, EMB_DIM, HIDDEN_DIM, SEQ_LENGTH, START_TOKEN)
     target_params = pickle.load(open('save/target_params.pkl', 'rb'), encoding='iso-8859-1')
     # pickle.load(open('save/target_params.pkl', ), encoding='iso-8859-1')
-    target_lstm = TARGET_LSTM(vocab_size, BATCH_SIZE, EMB_DIM, HIDDEN_DIM, SEQ_LENGTH, START_TOKEN, target_params) # The oracle model
+    target_lstm = TARGET_LSTM(vocab_size, BATCH_SIZE, EMB_DIM, HIDDEN_DIM, SEQ_LENGTH, START_TOKEN, target_params)  # The oracle model
 
-    discriminator = Discriminator(sequence_length=20, num_classes=2, vocab_size=vocab_size, embedding_size=dis_embedding_dim, 
-                                filter_sizes=dis_filter_sizes, num_filters=dis_num_filters, l2_reg_lambda=dis_l2_reg_lambda)
+    discriminator = Discriminator(sequence_length=20,
+                                  num_classes=2,
+                                  vocab_size=vocab_size,
+                                  embedding_size=dis_embedding_dim,
+                                  filter_sizes=dis_filter_sizes,
+                                  num_filters=dis_num_filters,
+                                  l2_reg_lambda=dis_l2_reg_lambda)
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
