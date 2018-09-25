@@ -172,7 +172,7 @@ def main():
 
             for _ in range(3):
                 dis_data_loader.reset_pointer()
-                for it in range(dis_data_loader.num_batch):
+                for it in xrange(dis_data_loader.num_batch):
                     x_batch, y_batch = dis_data_loader.next_batch()
                     feed = {
                         discriminator.input_x: x_batch,

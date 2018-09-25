@@ -16,8 +16,10 @@ class Gen_Data_loader():
                 if len(parse_line) == 20:
                     self.token_stream.append(parse_line)
 
+        # 对从data_file中读取的self.token_stream进行一个整块操作
         self.num_batch = int(len(self.token_stream) / self.batch_size)
         self.token_stream = self.token_stream[:self.num_batch * self.batch_size]
+
         self.sequence_batch = np.split(np.array(self.token_stream), self.num_batch, 0)
         self.pointer = 0
 
@@ -73,7 +75,6 @@ class Dis_dataloader():
         self.labels_batches = np.split(self.labels, self.num_batch, 0)
 
         self.pointer = 0
-
 
     def next_batch(self):
         ret = self.sentences_batches[self.pointer], self.labels_batches[self.pointer]

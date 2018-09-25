@@ -88,3 +88,27 @@ epoch:	150	nll:	8.6832
 ```
 
 Note: this code is based on the [previous work by ofirnachum](https://github.com/ofirnachum/sequence_gan). Many thanks to [ofirnachum](https://github.com/ofirnachum).
+
+参考文献：
+https://cloud.tencent.com/developer/article/1092339
+save：save文件夹下保存了我们的实验日志，
+eval_file是由Generator产生，用来评价Generator和oracle model相似性所产生的数据。
+real_data是由oracle model产生的real-world数据，
+generator_sample是由Generator产生的数据，
+target_params是oracle model的参数，我们直接用里面的参数还原oracle model。
+
+dataloader.py: 产生训练数据，对于Generator来说，我们只在预训练中使用dataloader来得到训练数据，
+对Discriminator来说，在预训练和对抗过程中都要使用dataloader来得到训练数据。
+而在eval过程即进行Generator和oracle model相似性判定时，会用到dataloader来产生数据。
+
+discriminator.py：定义了我们的discriminator
+
+generator.py ：定义了我们的generator
+
+rollout.py：计算reward时的采样过程
+
+target_lstm.py：定义了我们的oracle model，这个文件不用管，复制过去就好，哈哈。
+
+train.py : 定义了我们的训练过程，这是我们一会重点讲解的文件
+
+utils.py : 定义了一些在训练过程中的通用过程。
